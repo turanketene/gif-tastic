@@ -32,7 +32,7 @@ $(document).ready(function(){
                 var rating = response.data[j].rating;
                 console.log(response);
                 var p = $("<p>").text("Rating: " + rating);
-                displayDiv.append(p)
+                displayDiv.prepend(p);
 
                 $("#display-images").append(displayDiv);
             }
