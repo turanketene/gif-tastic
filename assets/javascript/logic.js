@@ -1,12 +1,13 @@
 // Api Key:
 // WMaZObMR3Qzek7ox7SpntqBYQBFfX5yF
 $(document).ready(function(){
-
-    var searchArray = ["cat", "dog", "bird", "fish", "plane", "cars", "hamburger", "hotdog", "pizza", "coffee"];
+    // List that will automatically be on the page at all times
+    var searchArray = ["cat", "dog", "bird", "fish", "plane", "cars", "hamburger", "hotdog", "pizza", "coffee", "Denzel Washington", "Brad Pitt", "Lionel Messi", "Cristiano Ronaldo", "motorcycle","ocean"];
 
     function displayImg(){
-
+    // empty div to avoid repetition
         $("#display-images").empty();
+        // Calling gifs using API
         var input = $(this).attr("data-name");
         var limit = 10;
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + input + "&limit=" + limit + "&api_key=WMaZObMR3Qzek7ox7SpntqBYQBFfX5yF";   
@@ -17,10 +18,10 @@ $(document).ready(function(){
         }).done(function(response) {
 
             for(var j = 0; j < limit; j++) {    
-
+                // Creating div to display gifs in
                 var displayDiv = $("<div>");
                 displayDiv.addClass("holder");
-            
+                // Creating image element to store gifs, then adding various attributes
                 var image = $("<img>");
                 image.attr("src", response.data[j].images.original_still.url);
                 image.attr("data-still", response.data[j].images.original_still.url);
@@ -39,6 +40,7 @@ $(document).ready(function(){
         });
     }
 
+    // Adding new buttons after entering text and submitting
     function renderButtons(){ 
 
         $("#display-buttons").empty();
@@ -54,6 +56,7 @@ $(document).ready(function(){
         }
     }
 
+    // Changing state between animated and still
     function imageChangeState() {          
 
         var state = $(this).attr("data-state");
@@ -83,84 +86,7 @@ $(document).ready(function(){
     })
 
     renderButtons();
-
+// Setting up onclicks
     $(document).on("click", "#input", displayImg);
     $(document).on("click", ".gif", imageChangeState);
 });
-
-
-
-
-
-
-
-
-
-
-// ==================================================================================
-// $(function() {
-//     populateButtons(searchArray, 'searchButton', '#buttonsArea');
-// })
-// // Buttons that will load automatically to the page
-// var searchArray = ["dog", "cat", "bird", "Denzel Washington", "Will Smith", "Chuck Norris", "Turkish"];
-
-// // Adding buttons 
-// function populateButtons(searchArray,classToAdd,areaToAddTo){
-//     $(areaToAddTo).empty();
-//     for(var i=0; i<searchArray.length; i++){
-//         var a = $("<button>");
-//         a.addClass(classToAdd);
-//         a.attr("data-type", searchArray[i]);
-//         a.text(searchArray[i]);
-//         $(areaToAddTo).append(a);
-
-//     }
-// }
-
-// // Getting the gifs from giphy and displaying it to the page
-// $("#searches").empty();
-// $(document).on("click", ".searchButton", function(){
-//     var type = $(this).data("type");
-//     var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + type + "&api_key=WMaZObMR3Qzek7ox7SpntqBYQBFfX5yF&limit=10";
-//     $.ajax({
-//     url: queryURL,
-//     method: "GET"
-//     }).done(function(response) {
-//     for(var i=0; i < response.data.length; i++){
-//         var searchDiv = $('<div class="search-item">');
-//         var rating = response.data[i].rating;
-//         var p = $("<p>").text("Rating: " +rating);
-//         var animated = response.data[i].images.fixed_height.url;
-//         var still = response.data[i].images.fixed_height_still.url;
-//         var image = $('<img>');
-//         image.attr('src', still);
-//         image.attr('data-still', still);
-//         image.attr('data-animated', animated);
-//         image.attr('data-state','still');
-//         image.addClass('searchImage');
-//         searchDiv.append(p);
-//         searchDiv.append(image);
-//         $('#searches').append(searchDiv);
-//         }
-//     })
-// })
-
-// // Switching between still and animated state
-// $(document).on('click', '.searchImage',function(){
-//     var state = $(this).attr('data-state');
-//     if(state == 'still'){
-//         $(this).attr('src',$(this).data('animated'));
-//         $(this).attr('data-state', 'animated');
-//     } else {
-//         $(this).attr('src',$(this).data('still'));
-//         $(this).attr('data-state', 'still');
-//     }
-// })
-
-// // Adding new button
-// $('#addSearch').on('click',function(){
-//     var newSearch = $('#input').eq(0).val();
-//     searchArray.push(newSearch);
-//     populateButtons(searchArray, 'searchButton','#buttonsArea');
-//     return false;
-// })
