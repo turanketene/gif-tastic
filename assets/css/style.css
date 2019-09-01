@@ -12,6 +12,7 @@ h1 {
 .jumbotron {
     margin-top: 20px;
     background-color: black;
+    border-radius: 20px; 
 }
 
 #display-buttons {
